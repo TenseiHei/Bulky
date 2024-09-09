@@ -38,13 +38,13 @@ namespace BulkyWeb.Controllers
             return View();
         }
 
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(int id)
         {
             if(id==null || id == 0)
             {
                 return NotFound();
             }
-            Category? categoryFromDb = _db.Categories.Find(id);
+            Category categoryFromDb = _db.Categories.Find(id);
             //Category? categoryFromDb1 = _db.Categories.FirstOrDefault(u=>u.Id==id);
             //Category? categoryFromDb2 = _db.Categories.Where(u=>u.Id==id).FirstOrDefault();
 
@@ -54,7 +54,7 @@ namespace BulkyWeb.Controllers
             }
             return View(categoryFromDb);
         }
-        [HttpPost]
+        [HttpPost] // We are sending information to the server.
         public IActionResult Edit(Category obj)
         {
             if (ModelState.IsValid)
@@ -67,13 +67,13 @@ namespace BulkyWeb.Controllers
             return View();
         }
 
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(int id)
         {
             if (id == null || id == 0)
             {
                 return NotFound();
             }
-            Category? categoryFromDb = _db.Categories.Find(id);
+            Category categoryFromDb = _db.Categories.Find(id);
 
             if (categoryFromDb == null)
             {
@@ -82,9 +82,9 @@ namespace BulkyWeb.Controllers
             return View(categoryFromDb);
         }
         [HttpPost, ActionName("Delete")]
-        public IActionResult DeletePOST(int? id)
+        public IActionResult DeletePOST(int id)
         {
-            Category? obj = _db.Categories.Find(id);
+            Category obj = _db.Categories.Find(id);
             if (obj == null)
             {
                 return NotFound();
